@@ -29,19 +29,18 @@ def fetch_data(caseid):
     return data
 
 
-dirpath = os.getcwd()
-
-# open the file in append mode
-outfile = open(dirpath + '\q4.json', 'a')
-
+data_list = []
 # loop the required case ids
 for x in range(23800, 23851):
     print("Processing case id %d" % x)
     # fetch data from the web page
     data = fetch_data(x)
-    # dump data into the opened file and add a new line
-    json.dump(data, outfile, indent=4)
-    outfile.write('\n')
+    # put data into a list
+    data_list.append(data)
 
-#close the file
-outfile.close()
+
+# get current directory
+dirpath = os.getcwd()
+# open the file and write into it
+with open(dirpath + '\q4.json', 'w') as outfile:
+    json.dump(data_list, outfile, indent=4)
