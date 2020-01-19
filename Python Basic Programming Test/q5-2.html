@@ -1,0 +1,291 @@
+
+
+<html>
+  
+   
+  <head>
+    <title>
+      Maryland Judiciary Case Search Criteria
+    </title>
+    <link href="css/inquiry-header.css" rel="stylesheet" type="text/css"/>
+    <link href="css/inquiry-default.css" rel="stylesheet" type="text/css"/>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+	<meta http-equiv="Pragma" content="no-cache" />
+	<meta http-equiv="Expires" content="0" />
+	
+	<!--  REFERENCE:  https://developers.google.com/analytics/devguides/collection/gtagjs/  -->
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-133500273-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+	
+	  gtag('config', 'UA-133500273-1');
+	</script>
+	
+    <script type="text/javascript" src="javascript/datetimepicker.js">
+    </script>
+    <script type="text/javascript" src="javascript/validDate.js">
+    </script>
+	<script type="text/javascript">
+	      function submitCompanyForm()
+	       {         
+	         document.forms[1].submit();
+	        }
+	</script> 
+	<script type="text/javascript">
+	      function submitJudgmentForm()
+	       {         
+	         document.forms[0].judgmentFlag.value = "true";
+	         document.forms[0].submit();
+	        }
+	</script> 
+    <script type="text/javascript">
+	  function removeSpecialChars(input) {
+	    input.value = input.value.replace(/[^A-Za-z0-9]/g,"").toUpperCase();
+	  }
+	
+	  function submitCaseIdSearch(inForm) {
+        removeSpecialChars(inForm.elements["caseId"]);
+		return true;
+	  }
+	  
+	  function submitParamSearch(inForm) {
+	    inForm.elements["lastName"].value = inForm.elements["lastName"].value.toUpperCase();
+	    inForm.elements["firstName"].value = inForm.elements["firstName"].value.toUpperCase();
+	    inForm.elements["middleName"].value = inForm.elements["middleName"].value.toUpperCase();
+		if (isValidDate(inForm.elements["filingStart"],'Filing Date Start','N') &&
+		    isValidDate(inForm.elements["filingEnd"],'Filing Date End','N') &&
+		    isValidDate(inForm.elements["filingDate"],'Exact Filing Date','N')) {
+		  return true;
+		} else {
+		  return false;
+		}
+		return false;
+	  }
+	</script>
+  </head>
+  
+  
+  
+  <body>
+  
+  	
+  
+    <div align="center">
+      <table id="pageHeader">
+  <tr>
+    <td width="100"><a href="http://www.courts.state.md.us/index.html"><IMG SRC="images/jud_seal.jpg" ALT="Judiciary Logo" WIDTH="60" HEIGHT="60" align="left"></a></td>
+    <td align="center" style="color:lightslategray">Maryland Judiciary Case Search Criteria</td>
+    <td width="100"><a href="http://www.courts.state.md.us/index.html"><IMG SRC="images/jud_seal.jpg" ALT="Judiciary Logo" WIDTH="60" HEIGHT="60" align="right"></a></td>
+  </tr>
+</table>
+
+
+
+  
+   	  <!--  System Status Message -->
+	  <p>System Status: Available <html> <br><font color="red">*** Coming Soon: Appellate (Court of Appeals and Court of Special Appeals) cases will be available in Case Search ***</html></p>
+        
+      
+
+	<form name="judgmentsForm" action="http://jportal.mdcourts.gov/judgment/index.jsf" method="POST">
+	  <div class="largeFont">Search for <a href="#" OnClick="submitJudgmentForm();"><u>Circuit Court Judgments and Liens</u></a></div>
+	  <input type="hidden" name="judgmentFlag" value="" />
+	</form>  
+
+    <table class="caseSearch">
+      <tr><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td><td align=center><div class="largeFont">Search Criteria</div></td><td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</td></tr>      
+      <tr>
+      <td>&nbsp;</td>
+      <td>Select the appropriate radio button to search cases by Person or Company. (Default is person) &nbsp;
+          <!-- This section is the new radio button form -->
+           <form name="inquiryForm" method="POST" action="/casesearch/inquiryByCompany.jis;jsessionid=3D-_7OiH-cpKFqR7G-KWFBQPwTStr4GhGx__QhUHBbxEyACrAjUg!354828736">
+             <input type="radio" name="company" value="Y" onclick="submitCompanyForm();">Company
+             <input type="radio" name="company" value="N" checked="checked" onclick="submitCompanyForm();">Person
+             <!-- <input type="submit" name="action" value="SearchByCompany" class="button"> -->
+           </form>
+  <!-- end of radio button form -->
+      </td>
+      <td>&nbsp;</td>
+      </tr>
+      <tr> 
+      <td>&nbsp;</td>
+      <td>
+         <table class="caseSearch1" width="100%">
+          <form name="inquiryForm" method="POST" action="/casesearch/inquirySearch.jis;jsessionid=3D-_7OiH-cpKFqR7G-KWFBQPwTStr4GhGx__QhUHBbxEyACrAjUg!354828736" onsubmit="return submitParamSearch(this)">
+         <tr>
+        <td class="bold"> Name 
+          </td>
+        <td colspan="2" align="left" nowrap>Last 
+          <input type="text" name="lastName" size="30" value="">
+          &nbsp;&nbsp;First 
+          <input type="text" name="firstName" size="30" value="">
+          &nbsp;&nbsp;Middle 
+          <input type="text" name="middleName" size="30" value=""> </td>
+      </tr>
+      <tr> 
+        <td>&nbsp;</td>
+        <td align="left" colspan="2"><input type="checkbox" name="exactMatchLn" value="Y">
+          Exact Match on Last Name</td>
+      </tr>
+      
+      
+      
+      
+      <tr>
+        <td align="left" class="bold">&nbsp;</td>
+        <td colspan="2" align="left" nowrap>&nbsp;</td>
+      </tr>
+      </table>
+      <br>
+      <br>
+      <table class="casesearch1" width="100%">
+      <tr> 
+        <td align="left" class="bold">Party Type</td>
+        <td colspan="2" align="left" nowrap><select name="partyType"><option value="" selected="selected">Default All</option>
+            <option value="ATN">Attorney</option>
+<option value="DEF">Defendant</option>
+<option value="PLN">Plaintiff</option>
+<option value="OTH">Other</option></select></td>
+      </tr>
+      <tr> 
+        <td width="15%" align="left" class="bold">Case Type</td>
+        <td colspan="2" nowrap><input type="radio" name="site" value="00" checked="checked">
+          All Case Types&nbsp;&nbsp; <input type="radio" name="site" value="CIVIL">
+          Civil&nbsp;&nbsp; <input type="radio" name="site" value="CRIMINAL">
+          Criminal&nbsp;&nbsp; <input type="radio" name="site" value="TRAFFIC">
+          Traffic&nbsp;&nbsp;<input type="radio" name="site" value="CP"> Civil Citation</td>
+      </tr>
+      <tr> 
+        <td align="left" class="bold">Court System</td>
+        <td colspan="2" nowrap><input type="radio" name="courtSystem" value="B" checked="checked">
+          Both Circuit and District Courts 
+          <input type="radio" name="courtSystem" value="C">
+          Circuit Court Only 
+          <input type="radio" name="courtSystem" value="D">
+          District Court Only </td>
+      </tr>
+      <tr> 
+        <td align="left" class="bold">County</td>
+        <td colspan="2" align="left" nowrap><select name="countyName"><option value="" selected="selected">Default All</option>
+            <option value="ALLEGANY COUNTY">Allegany County</option>
+<option value="ANNE ARUNDEL COUNTY">Anne Arundel County</option>
+<option value="BALTIMORE CITY">Baltimore City</option>
+<option value="BALTIMORE COUNTY">Baltimore County</option>
+<option value="CALVERT COUNTY">Calvert County</option>
+<option value="CAROLINE COUNTY">Caroline County</option>
+<option value="CARROLL COUNTY">Carroll County</option>
+<option value="CECIL COUNTY">Cecil County</option>
+<option value="CHARLES COUNTY">Charles County</option>
+<option value="DORCHESTER COUNTY">Dorchester County</option>
+<option value="FREDERICK COUNTY">Frederick County</option>
+<option value="GARRETT COUNTY">Garrett County</option>
+<option value="HARFORD COUNTY">Harford County</option>
+<option value="HOWARD COUNTY">Howard County</option>
+<option value="KENT COUNTY">Kent County</option>
+<option value="MONTGOMERY COUNTY">Montgomery County</option>
+<option value="PRINCE GEORGE&#39;S COUNTY">Prince George&#39;s County</option>
+<option value="QUEEN ANNE&#39;S COUNTY">Queen Anne&#39;s County</option>
+<option value="SAINT MARY&#39;S COUNTY">Saint Mary&#39;s County</option>
+<option value="SOMERSET COUNTY">Somerset County</option>
+<option value="TALBOT COUNTY">Talbot County</option>
+<option value="WASHINGTON COUNTY">Washington County</option>
+<option value="WICOMICO COUNTY">Wicomico County</option>
+<option value="WORCESTER COUNTY">Worcester County</option></select></td>
+      </tr>
+      <tr> 
+        <td align="left"><span class="bold">Filing Date</span><br>
+          Format:<br/>MM/DD/YYYY 
+            
+           </td>
+        <td align="left" nowrap> <table cellpadding="0">
+            <tr> 
+              <td>Range (from/to)</td>
+              <td class="fieldError"><input type="text" name="filingStart" maxlength="10" size="10" value="" id="filingStart"> 
+                <a href="javascript:NewCal('filingStart','mmddyyyy')"><img src="images/cal.gif" width="16" height="16" border="0" alt="Select Filing Start Date"/></a></td>
+              <td>&nbsp;&nbsp;&nbsp;to&nbsp;&nbsp;&nbsp;</td>
+              <td><input type="text" name="filingEnd" maxlength="10" size="10" value="" id="filingEnd"> 
+                <a href="javascript:NewCal('filingEnd','mmddyyyy')"><img src="images/cal.gif" width="16" height="16" border="0" alt="Select Filing End Date"/></a></td>
+            </tr>
+          </table></td>
+        <td align="left" nowrap> <table cellpadding="0">
+            <tr> 
+              <td>Exact Date:&nbsp;&nbsp;</td>
+              <td class="fieldError"><input type="text" name="filingDate" maxlength="10" size="10" value="" id="filingDate"> 
+                <a href="javascript:NewCal('filingDate','mmddyyyy')"> <img src="images/cal.gif" width="16" height="16" border="0" alt="Select Filing Date"/></a></td>
+            </tr>
+          </table></td>
+      </tr>
+      <tr> 
+        <td align="left">&nbsp;</td>
+       <!-- <td colspan="2" align="left"><input type="submit" name="action" value="Search" class="button">
+          &nbsp;&nbsp;&nbsp; <input type="button" name="action" value="Reset" onclick="window.location.href='inquirySearchParam.jis'" class="button"> 
+       --> </td>
+      </tr>
+    </table>
+    <center>
+    <input type="hidden" name="company" value="N">
+    <input type="submit" name="action" value="Search" class="button">
+          &nbsp;&nbsp;&nbsp; <input type="button" name="action" value="Reset" onclick="window.location.href='inquirySearchParam.jis'" class="button"> 
+    </center>      
+        </td>
+    </td>
+    <td>&nbsp;</td>
+    </tr>
+    </table>
+  </form>
+      <!-- FORM FOR GET CASE BY CASE NUMBER -->
+      <form name="inquiryFormByCaseNum" method="post" action="/casesearch/inquiryByCaseNum.jis;jsessionid=3D-_7OiH-cpKFqR7G-KWFBQPwTStr4GhGx__QhUHBbxEyACrAjUg!354828736" onsubmit="return submitCaseIdSearch(this)">
+  <div class="largeFont">Search By Case Number</div>        
+    <TABLE class="caseSearch">
+      <TR> 
+        <TD align="left" class="bold">Court</TD>
+        <TD align="left"><select name="locationCode"><option value="DC">District Court</option>
+            <option value="01">Allegany County Circuit Court</option>
+<option value="02">Anne Arundel County Circuit Court</option>
+<option value="24">Baltimore City Circuit Court</option>
+<option value="03">Baltimore County Circuit Court</option>
+<option value="04">Calvert County Circuit Court</option>
+<option value="05">Caroline County Circuit Court</option>
+<option value="06">Carroll County Circuit Court</option>
+<option value="07">Cecil County Circuit Court</option>
+<option value="08">Charles County Circuit Court</option>
+<option value="09">Dorchester County Circuit Court</option>
+<option value="10">Frederick County Circuit Court</option>
+<option value="11">Garrett County Circuit Court</option>
+<option value="12">Harford County Circuit Court</option>
+<option value="13">Howard County Circuit Court</option>
+<option value="14">Kent County Circuit Court</option>
+<option value="15">Montgomery County Circuit Court</option>
+<option value="16">Prince George&#39;s County Circuit Court</option>
+<option value="17">Queen Anne&#39;s County Circuit Court</option>
+<option value="18">Saint Mary&#39;s County Circuit Court</option>
+<option value="19">Somerset County Circuit Court</option>
+<option value="20">Talbot County Circuit Court</option>
+<option value="21">Washington County Circuit Court</option>
+<option value="22">Wicomico County Circuit Court</option>
+<option value="23">Worcester County Circuit Court</option></select></TD>
+        <TD align="left"><span class="smallFont">(Select County for Circuit Court.)</span></TD>
+      </TR>
+      <TR> 
+        <TD align="left" class="bold">Case Number
+          </TD>
+        <TD align="left"><input type="text" name="caseId" maxlength="23" size="18" value="" onblur="removeSpecialChars(this)"> 
+        </TD>
+        <TD align="left"><span class="smallFont">(You may omit dashes &quot;-&quot; 
+          during input. For Traffic, you may omit leading zeroes.)</span></TD>
+      </TR>
+      <TR> 
+        <TD width="15%" align="left" class="bold"> </TD>
+        <TD align="left"> <input type="submit" name="action" value="Get Case" class="button"> 
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" name="action" value="Reset" onclick="window.location.href='inquirySearchParam.jis'" class="button"> 
+        </TD>
+        <TD align="left">&nbsp;</TD>
+      </TR>
+    </TABLE>
+      </form>
+  <a href="http://mdcourts.gov/casesearchhtml/faq.html">Frequently Asked Questions</a> <p class="smallFont">Copyright &copy; 2020 Maryland Judiciary. All rights reserved. <a href="http://mdcourts.gov/reference/termsdisclaimer.html">Terms of Use/Disclaimer</a></p></div>
+  </body>
+</html>
