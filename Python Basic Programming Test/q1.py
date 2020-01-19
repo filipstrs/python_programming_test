@@ -14,16 +14,16 @@ Lists are not hashable, while tuples are, so they can be used as a key in a dict
 """
 
 # c.
-
+# using for loop
 for x in range(1, 101):
     if x % 7 == 0 and x % 6 == 0:
-            val = "Docket Alarm"
-        elif x % 7 == 0:
-            val = "Docket"
-        elif x % 6 == 0:
-            val = "Alarm"
-        else:
-            val = x
+        val = "Docket Alarm"
+    elif x % 7 == 0:
+        val = "Docket"
+    elif x % 6 == 0:
+        val = "Alarm"
+    else:
+        val = x
     print val
 
 """ d. A generator is a function that returns a lazy iterator. 
@@ -35,7 +35,7 @@ Generators are iterated over only once. When it is done, StopIteration is raised
 To restart the iteration, a new generator must be created.
 For loops can also iterate over generators because they use next() for the iterator.
 """
-
+# using a generator
 def test_value():
     for x in range(101):
         if x % 7 == 0 and x % 6 == 0:
